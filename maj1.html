@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <title>Form Validation</title>
+  <style>
+    body {
+      background-color: black;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    label {
+      color: gold; /* Set label text color to coral */
+    }
+    h2 {
+      color: aqua;
+    }
+    .form-control {
+      color: #555; 
+    }
+     .btn-primary {
+      background-color: green;
+      color: #fff; /* Set button text color to white */
+    }
+    .btn-secondary {
+      background-color: blue;
+      color: #fff; 
+    }
+    .error-message {
+      color: #dc3545;
+      font-size: 14px;
+      margin-top: 5px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .btn {
+      transition: transform 0.2s ease-in-out;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <center>
+  <div class="container">
+    <h2 class="mb-4"><b>Form Validation</b></h2>
+    <form id="validationForm">
+      <div class="form-group">
+        <label for="fullName"><b><h4>Full Name :</h4></b></label>
+        <input type="text" class="form-control" id="fullName" required>
+      </div>
+      <div class="form-group">
+        <label for="email"><b><h4>Email Id :</h4></b></label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone"><b><h4>Phone Number :</h4></b></label>
+        <input type="text" class="form-control" id="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="password"><b><h4>Password :</h4></b></label>
+        <input type="password" class="form-control" id="password" required>
+      </div>
+      <div class="form-group">
+        <label for="confirm Password"><b><h4>Confirm Password :</h4></b></label>
+        <input type="password" class="form-control" id="confirmPassword" required>
+      </div> &nbsp; &nbsp; &nbsp; 
+      <button type="submit" class="btn btn-primary"><b>Submit</b></button> 
+      <button type="reset" class="btn btn-secondary ml-2"><b>Reset</b></button>
+    </form>
+  </div>
+</center>
+  <script>
+    document.getElementById('validationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      validateForm();
+    });
+
+    function validateForm() {
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Name validation
+      if (fullName.length < 5) {
+        alert('Full Name must be at least 5 characters');
+        return;
+      }
+
+      // Email validation
+      if (!email.includes('@')) {
+        alert('Enter a correct email address');
+        return;
+      }
+
+      // Phone validation
+      if (phone.length !== 10 || phone === '123456789') {
+        alert('Enter a valid 10-digit phone number');
+        return;
+      }
+
+      // Password validation
+      if (password.length < 8 || password.toLowerCase() === 'password' || password.toLowerCase() === fullName.toLowerCase()) {
+        alert('Password is not strong');
+        return;
+      }
+      
+      // Confirm Password validation
+      if (password !== confirmPassword) {
+        alert('Password and Confirm Password do not match');
+        return;
+      }
+      alert('Form submitted successfully!');
+    }
+    setTimeout(() => {
+        errorElement.style.opacity = 0;
+      }, 3000); // 3000 milliseconds (3 seconds) delay
+  </script>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
